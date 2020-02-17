@@ -28,6 +28,5 @@ const PORT = 5200;
 httpServer.listen({
     port: PORT
 },
-() => console.log(`Servidor academia online listo http://localhost:${PORT}
-}`)
+() => console.log(`Servidor academia online listo http://localhost:${PORT}`)
 );
