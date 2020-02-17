@@ -4,7 +4,10 @@
   "description": "API GraphQL Academia Online",
   "main": "build/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node build/server.js",
+    "build": "tsc -p . && ncp src/schema build/schema",
+    "start:dev": "npm run build:dev",
+    "build:dev": "nodemon \"src/server.ts\" --exec \"ts-node\" src/server.ts -e ts,graphql"
   },
   "author": "Angel Javier Puc Yama <angelpuc08@gmail.com>",
   "license": "MIT",
