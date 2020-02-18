@@ -38,6 +38,30 @@ const mutation: IResolvers = {
         teacher: '',
         reviews: []
       }
+    },
+    modificarCurso(__: void, { curso }): any {
+      const elementoExiste = _.findIndex(database.cursos, function (o) {
+        return o.id === curso.id
+      });
+      if (elementoExiste > -1) {
+        const valoraciones = database.cursos[elementoExiste].reviews;
+        curso.reviews = valoraciones;
+        database.cursos[elementoExiste] = curso;
+        return curso;
+      } else {
+        return {
+          id: '-1',
+          title: 'El curso no existe en la base de datos',
+          description: '',
+          clases: -1,
+          time: 0.0,
+          level: 'TODOS',
+          logo: '',
+          path: '',
+          teacher: '',
+          reviews: []
+        }
+      }
     }
   }
 };
