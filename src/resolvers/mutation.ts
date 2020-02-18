@@ -2,6 +2,7 @@ import { IResolvers } from "graphql-tools";
 import _ from "lodash";
 import { constants } from "buffer";
 import { database } from "../data/data.store";
+import { cursorTo } from "readline";
 
 const mutation: IResolvers = {
   Mutation: {
@@ -62,6 +63,27 @@ const mutation: IResolvers = {
           reviews: []
         }
       }
+    },
+    eliminarCurso(__: void, { id }): any {
+      const borraCurso = _.remove(database.cursos, function(curso){
+        return curso.id === id;
+      });
+
+      if (borraCurso[0] === undefined) {
+        return {
+          id: '-1',
+          title: 'El curso no se puede borrar, por que no se ha encontrado ningun curso con ese ID',
+          description: '',
+          clases: -1,
+          time: 0.0,
+          level: 'TODOS',
+          logo: '',
+          path: '',
+          teacher: '',
+          reviews: []
+        }
+      }
+      return borraCurso[0];
     }
   }
 };
